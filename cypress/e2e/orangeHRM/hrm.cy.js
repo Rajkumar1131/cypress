@@ -1,55 +1,59 @@
 // /<reference type="cypress"/>
 import { orangeHrm } from "./hrm"
 
-before(function(){
-    cy.visit(Cypress.env('URL'))
-    a.loginToTheApplication()
-})
+    beforeEach(function(){
 
-after(function(){
-    a.clickOnLogout()
-})
+        a.loginToTheApplication('Admin','admin123')
+      
 
-const a=new orangeHrm 
+    })
 
-it('login to the application',function(){
-    cy.visit('opensource-demo.orangehrmlive.com')
-    
-    a.enterUserName()
 
-    a.enterPassword()
-    
-    a.clickOnLogin()
-    a.clickOnLogout()
-})
-it.only('Performance Module',function(){
-    //a.loginToTheApplication()
-    a.clickOnPerformance()
-    a.enterRequiredFiledsInPerformance()
-    a.clickOnFromDateInPerformance()
-    //a.clickOnToDateInPerformance()
-    a.clickOnSearch()
+    const a=new orangeHrm 
 
-})
+    it('login to the application',function(){
+        cy.visit('opensource-demo.orangehrmlive.com')
+        
+        a.enterUserName('Admin')
 
-it('verifying all the modules' ,function(){
-    a.loginToTheApplication()
-    
-    a.verifyAllTheModulesInTheApplication()
-})
+        a.enterPassword('admin123')
+        
+        a.clickOnLogin()
+        
+        a.clickOnLogout()
 
-it('verify all modukes in dynamic way',function(){
+        
+    })
+    it('Performance Module',function(){
 
-    a.verifyingModulesInDynamicWay()
-})
+        a.clickOnPerformance()
 
-it('adding a person',function(){
+        a.enterRequiredFiledsInPerformance()
 
-    a.loginToTheApplication()
-    a.addAPerson()
-    a.enterAllMandatoryFieldsToAddUser()
-})
+        a.clickOnFromDateInPerformance()
 
-it.only('url',function(){
-    a.globalVariables()
-})
+        a.clickOnToDateInPerformance()
+        
+    })
+
+    it('verifying all the modules' ,function(){
+        
+        a.verifyAllTheModulesInTheApplication()
+
+    })
+
+    it.only('verify all modukes in dynamic way',function(){
+
+        a.verifyingModulesInDynamicWay()
+    })
+
+    it.only('adding a person',function(){
+
+        a.addAPerson()
+
+        a.enterAllMandatoryFieldsToAddUserAsAdmin()
+    })
+
+    it('url',function(){
+        a.globalVariables()
+    })
