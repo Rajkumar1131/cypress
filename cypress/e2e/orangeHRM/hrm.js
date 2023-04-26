@@ -1,47 +1,202 @@
 export class orangeHrm {
 
+      elements ={
 
+         userName       :() => cy.get('[name=username]'),
+
+         password       :() => cy.get('[name=password]'),
+
+         loginButton    :() => cy.get('[type=submit]'),
+
+         logoutButton   :() => cy.get('li>ul>li a:contains("Logout")'),
+
+         searchButton   :() => cy.get('[type="submit"]')
+      }
+
+      allModules ={
+
+         adminModule          :() => cy.get('span:contains("Admin")'),
+
+         pimModule            :() => cy.get('span:contains("PIM")'),
+
+         leaveModule          :() => cy.get('span:contains("Leave")'),
+
+         timeModule           :() => cy.get('span:contains("Time")'),
+
+         recruitmentModule    :() => cy.get('span:contains("Recruitment")'),
+
+         myInfoModule         :() => cy.get('span:contains("My Info")'),
+
+         performanceModule    :() => cy.get('span:contains("Performance")'),
+
+         dashboardModule      :() => cy.get('span:contains("Dashboard")'),
+
+         directoryModule      :() => cy.get('span:contains("Directory")'),
+
+         maintenanceModule    :() => cy.get('span:contains("Maintenance")'),
+
+         buzzModule           :() => cy.get('span:contains("Buzz")')
+
+      }
+
+      allDetailsOfPerformance={
+
+         enterHint                  :() => cy.get('input[placeholder="Type for hints..."]'),
+
+         employeeName               :() => cy.get('span:contains("Lisa  Andrews")'),
+
+         dropDownToSelectJobTitle   :() => cy.get('i.oxd-select-text--arrow').eq(0),
+
+         selectJobTitle             :() => cy.get('span:contains("Software Engineer")'),
+
+         dropDownInSubUnit          :() => cy.get('i.oxd-select-text--arrow').eq(1),
+
+         selectOptionInSubUit       :() => cy.get('span:contains("Engineering")'),
+
+         DropDownInInclude          :() => cy.get('i.oxd-select-text--arrow').eq(2),
+
+         selectOptionInInclude      :() => cy.get('span:contains("Current and Past Employees")'),
+
+         dropDownInReview           :() => cy.get('i.oxd-select-text--arrow').eq(3),
+
+         selectOptionInReview       :() => cy.get('span:contains("Completed")')
+         
+        
+
+      }
+
+      FromDateInPerformance ={
+
+         dropdownToSelectFromDate     :() => cy.get('form>div>div:nth-of-type(6) i'),
+
+         dropdownToSelectYear         :() => cy.get('div.oxd-date-input-calendar ul>li:last-child i'),
+
+         selectYear                   :() => cy.get('li>ul[role="menu"] li:contains("2019")'),
+
+         dropDownToSelectMonth        :() => cy.get('div.oxd-date-input-calendar div>ul>li:first-child'),
+
+         selectMonth                  :() => cy.get('li>ul[role="menu"] li:contains("March")'),
+
+         selectDate                   :() => cy.get('.oxd-calendar-dates-grid>div:nth-of-type(11)')
+                                    
+
+      }
+
+      toDateInPerformance ={
+
+         dropdownToSelectToDate       :() => cy.get('.oxd-icon.bi-calendar.oxd-date-input-icon').eq(1),
+
+         dropdownToSelectYear         :() => cy.get('.oxd-icon.bi-caret-down-fill.oxd-icon-button__icon').eq(1),
+
+         selectYear                   :() => cy.get('li>ul[role="menu"] li:contains("2022")'),
+
+         dropDownToSelectMonth        :() => cy.get('div.oxd-date-input-calendar div>ul>li:first-child'),
+
+         selectMonth                  :() => cy.get('li>ul[role="menu"] li:contains("March")'),
+
+         selectDate                   :() => cy.get('.oxd-calendar-dates-grid>div:nth-of-type(11)')
+
+      }
+
+      newAdmin ={
+
+         addButton                   :() => cy.get('button:contains("Add")'),
+
+         dropDownToSelectUserRole    :() => cy.get('.oxd-select-text--after').eq(0),
+
+         selectOptionInUserRole      :() => cy.get('span:contains("ESS")'),
    
-   enterUserName(){
-    cy.get('[name=username]').type('Admin')
+         typeHintToSelectName        :() => cy.get('[placeholder="Type for hints..."]'),
+         
+         selectEmployeeName          :() => cy.get('span:contains("Odis  Adalwin")'),
+   
+         dropDownForStatus           :() => cy.get('.oxd-select-text--after').eq(1),
+   
+         selectOptionInStatus        :() => cy.get('span:contains("Enabled")'),
+   
+         enterUserNameInAdmin        :() => cy.get('.oxd-input.oxd-input--active').eq(1),
+   
+         enterPasswordInAdmin        :() => cy.get('[type="password"]').eq(0),
+   
+         enterConfirmPassword        :() => cy.get('[type="password"]').eq(1),
+   
+         savebutton                  :() => cy.get('[type="submit"]')
+         
+
+      }
+      
+
+
+   enterUserName(username){
+    
+         this.elements.userName().clear()
+
+         this.elements.userName().type(username)
+
    }
-   enterPassword(){
-    cy.get('[name=password]').type("admin123")
+   enterPassword(Password){
+
+         this.elements.password().clear()
+
+         this.elements.password().type(Password)
+
    }
    clickOnLogin(){
-    cy.get('[type=submit]').click()
+
+         this.elements.loginButton().should('exist')
+
+         this.elements.loginButton().click()
+
    }
 
-   loginToTheApplication(){
-      //cy.visit('opensource-demo.orangehrmlive.com')
-      this.enterUserName()
-      this.enterPassword()
-      this.clickOnLogin()
+   loginToTheApplication(username,Password){
+
+         cy.visit('opensource-demo.orangehrmlive.com')
+
+         this.enterUserName(username)
+
+         this.enterPassword(Password)
+
+         this.clickOnLogin()
+
    }
 
    clickOnLogout(){
 
-      cy.get('.oxd-userdropdown-tab>i').click()
+      
 
-      cy.get('li>ul>li a:contains("Logout")').click()
+      this.elements.logoutButton().click()
       
    }
+
+
    verifyAllTheModulesInTheApplication(){
-    
-      cy.get('span:contains("Admin")').sholud('exist')
 
-      cy.get('span:contains("PIM")').sholud('exist')
-      cy.get('span:contains("Leave")').sholud('exist')
-      cy.get('span:contains("Time")').sholud('exist')
-      cy.get('span:contains("Recruitment")').sholud('exist')
-      cy.get('span:contains("My Info")').sholud('exist')
-      cy.get('span:contains("Performance")').sholud('exist')
-      cy.get('span:contains("Dashboard")').sholud('exist')
-      cy.get('span:contains("Directory")').sholud('exist')
-      cy.get('span:contains("Maintenance")').sholud('exist')
-      cy.get('span:contains("Buzz")').sholud('exist')
+     
+      this.allModules.adminModule().should('exist')
+
+      this.allModules.pimModule().should('exist')
+
+      this.allModules.leaveModule().should('exist')
+
+      this.allModules.timeModule().should('exist')
+
+      this.allModules.recruitmentModule().should('exist')
+
+      this.allModules.myInfoModule().should('exist')
+
+      this.allModules.performanceModule().should('exist')
+
+      this.allModules.dashboardModule().should('exist')
+
+      this.allModules.directoryModule().should('exist')
+
+      this.allModules.maintenanceModule().should('exist')
+
+      this.allModules.buzzModule().should('exist')
       
    }
+
 
    verifyingModulesInDynamicWay(){
       const modules = [
@@ -56,126 +211,109 @@ export class orangeHrm {
          'Maintenance'
        ];
        
-       //for (let i = 0; i < modules.length; i++) {
-        // const m ='span:contains("${modules[i]}")';
+       for (let i = 0; i < modules.length; i++) {
         
-         //cy.get('span:contains("${modules[i]}")').should('exist');
-         //cy.contains('span', modules[i]).should('exist');
          
-      // }
-       /*cy.wrap(modules).each( module=> {
-            cy.contains('span', modules).should('exist');
-          });*/
-
+         cy.contains('span', modules[i]).should('exist');
+   
+         
+       }
+       
    }
 
    clickOnPerformance(){
 
-      cy.get('span:contains("Performance")').click()
+      this.allModules.performanceModule().click()
    }
 
    clickOnFromDateInPerformance(){
-      cy.get('form>div>div:nth-of-type(6) i').click()//dropdown to select date and year
-      
-      cy.get('div.oxd-date-input-calendar ul>li:last-child i').click() //dropdown to select year
-      cy.get('li>ul[role="menu"] li:contains("2019")').click()
-      cy.get('div.oxd-date-input-calendar div>ul>li:first-child').click()//dropdown to select month
-      cy.get('li>ul[role="menu"] li:contains("March")').click()
-      cy.get('.oxd-calendar-dates-grid>div:nth-of-type(11)').click()
+
+
+      this.FromDateInPerformance.dropdownToSelectFromDate().click()
+
+      this.FromDateInPerformance.dropdownToSelectYear().click()
+
+      this.FromDateInPerformance.selectYear().click()
+
+      this.FromDateInPerformance.dropDownToSelectMonth().click()
+
+      this.FromDateInPerformance.selectMonth().click()
+
+      this.FromDateInPerformance.selectDate().click()
 
    }
 
    clickOnToDateInPerformance(){
 
-      cy.get('form>div>div:nth-of-type(7) i').click()//dropdown to select date and year
+      this.toDateInPerformance.dropdownToSelectToDate().click()
 
-      cy.get('div.oxd-date-input-calendar ul>li:last-child >div>i').click() //drop down to select year
-      cy.get('li>ul[role="menu"] li:contains("2022")').click() 
-      cy.get('div.oxd-date-input-calendar div>ul>li:first-child').click()//drop down to select month
-      cy.get('li>ul[role="menu"] li:contains("March")').click()
-      cy.get('.oxd-calendar-dates-grid>div:nth-of-type(11)').click()
+      this.toDateInPerformance.dropdownToSelectYear().click() 
+
+      this.toDateInPerformance.selectYear().click() 
+
+      this.toDateInPerformance.dropDownToSelectMonth().click()
+
+      this.toDateInPerformance.selectMonth().click()
+
+      this.toDateInPerformance.selectDate().click()
    }
    enterRequiredFiledsInPerformance(){
 
-      cy.get('input[placeholder="Type for hints..."]').type('s')
-      //cy.get('span:contains("Test Account")').click()
+      this.allDetailsOfPerformance.enterHint().type('s')
 
+      this.allDetailsOfPerformance.employeeName().click()
 
-      cy.get('i.oxd-select-text--arrow').eq(0).click()
-      //cy.get('form>div>div:nth-of-type(2)>div>div:nth-of-type(2)>div>div>div:nth-of-type(2)').click()
-      //cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text--after > .oxd-icon')
-      cy.get('span:contains("Software Engineer")').click()
+      this.allDetailsOfPerformance.dropDownToSelectJobTitle().click()
 
-      cy.get('i.oxd-select-text--arrow').eq(1).click()
+      this.allDetailsOfPerformance.selectJobTitle().click()
 
-      cy.get('span:contains("Engineering")').click()
+      this.allDetailsOfPerformance.dropDownInSubUnit().click()
 
-      cy.get('form>div>div:nth-of-type(4)>div>div:nth-of-type(2)>div>div>div:nth-of-type(2)').click()
+      this.allDetailsOfPerformance.selectOptionInSubUit().click()
 
-      cy.get('span:contains("Current and Past Employees")').click()
+      this.allDetailsOfPerformance.DropDownInInclude().click()
 
-      cy.get('form>div>div:nth-of-type(5)>div>div:nth-of-type(2)>div>div>div:nth-of-type(2)').click()
+      this.allDetailsOfPerformance.selectOptionInInclude().click()
 
-      cy.get('span:contains("Completed")').click()
+      this.allDetailsOfPerformance.dropDownInReview().click()
 
-      /*cy.get('').click()
-
-      cy.get('').click()
-
-      cy.get('').click()*/
-
+      this.allDetailsOfPerformance.selectOptionInReview().click()
 
    }
    clickOnSearch()
    {
-      cy.get('[type="submit"]').click()
-      //cy.get('span:contains("Engineering")').click()
+      this.elements.searchButton().click()
+   }
+
+   enterAllMandatoryFieldsToAddUserAsAdmin(){
+
+
+      this.allModules.adminModule().click()
+
+      this.newAdmin.addButton().click()
+
+      this.newAdmin.dropDownToSelectUserRole().click()
+
+      this.newAdmin.selectOptionInUserRole().click()
+
+      this.newAdmin.typeHintToSelectName().type('o')
       
+      this.newAdmin.selectEmployeeName().click()
+
+      this.newAdmin.dropDownForStatus().click()
+
+      this.newAdmin.selectOptionInStatus().click()
+
+      this.newAdmin.enterUserNameInAdmin().type('RajKumar')
+
+      this.newAdmin.enterPasswordInAdmin().type('RajKumar@123')
+
+      this.newAdmin.enterConfirmPassword().type('RajKumar@123 ')
+
+      this.newAdmin.savebutton().click()
    }
 
-   addAPerson(){
-
-
-      cy.get('span:contains("Admin")').click()
-      cy.get('button:contains("Add")').click()
-
-   }
-
-   enterAllMandatoryFieldsToAddUser(){
-
-      cy.get('.oxd-select-text--after').eq(0).click()
-
-      //cy.get('span:contains("Admin")').eq(3).click()
-
-      cy.get('.oxd-select-option').eq(1).click()
-
-      cy.get('[placeholder="Type for hints..."]').type('o')
-      
-      cy.get('span:contains("Odis  Adalwin")').click()
-
-      cy.get('.oxd-select-text--after').eq(1).click()
-
-      cy.get('span:contains("Enabled")').click()
-
-      cy.get('.oxd-input.oxd-input--active').eq(1).type(' ')
-
-      cy.get('[type="password"]').eq(0).type('raj123')
-
-      cy.get('[type="password"]').eq(1).type('raj123')
-
-      cy.get('[type="submit"]').click()
-cy.get('span:contains("Required")').should('exist')
-   }
-
-   errorMessageFor(){
-
-      
-   }
-
-
-
-   globalVariables(){
-      cy.visit(Cypress.env('URL'))
-   }
+   
+   
 
 }
