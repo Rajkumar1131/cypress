@@ -12,6 +12,9 @@ import { orangeHrm } from "./hrm"
     const a=new orangeHrm 
 
     it('login to the application',function(){
+
+        a.clickOnLogout()
+
         cy.visit('opensource-demo.orangehrmlive.com')
         
         a.enterUserName('Admin')
@@ -42,14 +45,13 @@ import { orangeHrm } from "./hrm"
 
     })
 
-    it.only('verify all modukes in dynamic way',function(){
+    it('verify all modukes in dynamic way',function(){
 
         a.verifyingModulesInDynamicWay()
     })
 
-    it.only('adding a person',function(){
+    it('adding a person',function(){
 
-        a.addAPerson()
 
         a.enterAllMandatoryFieldsToAddUserAsAdmin()
     })

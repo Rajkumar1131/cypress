@@ -2,15 +2,19 @@ export class orangeHrm {
 
       elements ={
 
-         userName       :() => cy.get('[name=username]'),
+         getUrl           :() => cy.visit(Cypress.env('URL')),
 
-         password       :() => cy.get('[name=password]'),
+         userName         :() => cy.get('[name=username]'),
 
-         loginButton    :() => cy.get('[type=submit]'),
+         password         :() => cy.get('[name=password]'),
 
-         logoutButton   :() => cy.get('li>ul>li a:contains("Logout")'),
+         loginButton      :() => cy.get('[type=submit]'),
 
-         searchButton   :() => cy.get('[type="submit"]')
+         dropdownToLogout  :() => cy.get('.oxd-icon.bi-caret-down-fill.oxd-userdropdown-icon'),
+
+         logoutButton     :() => cy.get('li>ul>li a:contains("Logout")'),
+
+         searchButton     :() => cy.get('[type="submit"]')
       }
 
       allModules ={
@@ -108,7 +112,7 @@ export class orangeHrm {
    
          typeHintToSelectName        :() => cy.get('[placeholder="Type for hints..."]'),
          
-         selectEmployeeName          :() => cy.get('span:contains("Odis  Adalwin")'),
+         selectEmployeeName          :() => cy.get('span:contains("Dominic  Chase")'),
    
          dropDownForStatus           :() => cy.get('.oxd-select-text--after').eq(1),
    
@@ -163,7 +167,7 @@ export class orangeHrm {
 
    clickOnLogout(){
 
-      
+      this.elements.dropdownToLogout().click()
 
       this.elements.logoutButton().click()
       
@@ -265,7 +269,7 @@ export class orangeHrm {
 
       this.allDetailsOfPerformance.dropDownToSelectJobTitle().click()
 
-      this.allDetailsOfPerformance.selectJobTitle().click()
+      //this.allDetailsOfPerformance.selectJobTitle().click()
 
       this.allDetailsOfPerformance.dropDownInSubUnit().click()
 
@@ -278,6 +282,8 @@ export class orangeHrm {
       this.allDetailsOfPerformance.dropDownInReview().click()
 
       this.allDetailsOfPerformance.selectOptionInReview().click()
+
+      this.elements.searchButton().click()
 
    }
    clickOnSearch()
@@ -308,9 +314,14 @@ export class orangeHrm {
 
       this.newAdmin.enterPasswordInAdmin().type('RajKumar@123')
 
-      this.newAdmin.enterConfirmPassword().type('RajKumar@123 ')
+      this.newAdmin.enterConfirmPassword().type('RajKumar@123')
 
       this.newAdmin.savebutton().click()
+   }
+
+   globalVariables(){
+
+         this.elements.getUrl()
    }
 
    
